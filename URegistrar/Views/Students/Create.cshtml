@@ -1,0 +1,19 @@
+@{
+  Layout = "_Layout";
+}
+
+@model URegistrar.Models.Student
+
+<h3>Enter new student</h3>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.StudentName)
+  @Html.TextBoxFor(model => model.StudentName)
+
+  @Html.LabelFor(model => model.StartDate)
+  @Html.TextBoxFor(model => model.StartDate)
+  <input type="submit" value="Add new student" />
+}
+
+<p>@Html.ActionLink("Show all students", "Index")</p>

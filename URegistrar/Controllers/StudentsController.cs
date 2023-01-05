@@ -19,5 +19,17 @@ namespace URegistrar.Controllers
       List<Student> model = _db.Students.ToList();
       return View(model);
     }
+    public ActionResult Create()
+    {
+      return View();
+    }
+
+    [HttpPost]
+    public ActionResult Create(Student student)
+    {
+      _db.Students.Add(student);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
