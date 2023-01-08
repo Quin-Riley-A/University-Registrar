@@ -1,7 +1,7 @@
 @{
   Layout = "_Layout";
 }
-@model URegistrar.Models.student
+@model URegistrar.Models.Student
 
 <h2>Edit Student</h2>
 <h4>Edit the following Student: @Html.DisplayFor(model => model.StudentName)</h4>
@@ -19,3 +19,4 @@
 }
 <p>@Html.ActionLink("Return to Student Index", "Index")</p>
 <p>@Html.ActionLink("Return to Student Details page","Details", new { id = Model.StudentId } )</p>
+<p>@Html.ActionLink("Return to Homepage","Home","Home")</p>

@@ -1,0 +1,31 @@
+@{
+  Layout = "_Layout";
+}
+@model URegistrar.Models.Course
+@*@using URegistrar.Models*@
+
+<h2>Course Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.CourseName): @Html.DisplayFor(model => model.CourseName)</h3>
+
+@if(@Model.Students.Count == 0)
+{
+  <p>This course does not have any students enrolled yet!</p>
+}
+else
+{
+  <h4>Students enrolled in this course:</h4>
+  <ul>
+    @foreach (Student student in Model.Students)
+    {
+      <li>@Html.ActionLink($"{student.StudentName}", "Details", "Students", new { id = student.StudentId })</li>
+
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Back to Course Index", "Index")</p>
+<p>@Html.ActionLink("Go to Student Index", "Index", "Students")</p>
+<p>@Html.ActionLink("Edit Course", "Edit", new { id = Model.CourseId })</p>
+<p>@Html.ActionLink("Delete Course", "Delete", new { id = Model.CourseId })</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>

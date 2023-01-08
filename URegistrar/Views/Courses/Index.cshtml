@@ -1,0 +1,26 @@
+@{
+  Layout = "_Layout";
+}
+
+@using URegistrar.Models;
+
+<div>
+  <h1>Courses</h1>
+</div>
+
+@if (@Model.Count == 0)
+{
+  <h3>No courses have been added yet!</h3>
+}
+
+<ul>
+  @foreach(Course course in Model)
+  {
+    <li>@Html.ActionLink($"{course.CourseName}", "Details", new { id = course.CourseId })</li>
+  }
+</ul>
+
+<p>@Html.ActionLink("Add a new Course", "Create")</p>
+<p>@Html.ActionLink("See Student List", "Index", "Students")</p>
+<p>@Html.ActionLink("Add a new Student", "Create", "Students")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
