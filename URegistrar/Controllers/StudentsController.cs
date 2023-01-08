@@ -48,12 +48,25 @@ namespace URegistrar.Controllers
       return RedirectToAction("Index");
     }
 
-    public ActonResult Details(int id)
+    public ActionResult Details(int id)
     {
       Student thisStudent = _db.Students
         .Include(student => student.Courses)
         .FirstOrDefault(StudentsController => student.StudentId == id);
       return View(thisStudent);
+    }
+    public ActionResult Edit(int id)
+    {
+      Student thisStudent = _db.Students
+        .FirstOrDefault(student => student.StudentId == id);
+      return View(thisStudent);
+    }
+    [HttpPost]
+    public ActionResult Edit(Student student)
+    {
+      _db.Students.Update(student);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
   }
 }
