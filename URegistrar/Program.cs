@@ -14,7 +14,7 @@ namespace URegistrar
 
       builder.Services.AddControllersWithViews();
 
-      builder.Services.AddDbContext<HairSalonContext>(
+      builder.Services.AddDbContext<URegistrarContext>(
         dbContextOptions => dbContextOptions
           .UseMySql(
             builder.Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(builder.Configuration["ConnectionStrings:DefaultConnection"]
