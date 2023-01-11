@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using URegistrar.Models;
@@ -37,6 +38,7 @@ namespace URegistrar.Controllers
     {
       Course thisCourse = _db.Courses
         .Include(course => course.Enrollments)
+        .ThenInclude(join => join.Student)
         .FirstOrDefault(course => course.CourseId == id);
       return View(thisCourse);
     }   
@@ -67,6 +69,28 @@ namespace URegistrar.Controllers
       _db.Courses.Update(course);
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+
+    public ActionResult AddStudent(int id)
+    {
+      Course thisCourse= _db.Courses.
+        FirstOrDefault(course => course.CourseId == id);
+      ViewBag.StudentId = new SelectList(_db.Students, "StudentId", "StudentName");
+      return View(thisCourse);
+    }
+
+    [HttpPost]
+    public ActionResult AddStudent(Course course, int studentId)
+    {
+      #nullable enable
+      Enrollment? enrollment = _db.Enrollments.FirstOrDefault(join => (join.StudentId == studentId && join.CourseId == course.CourseId));
+      #nullable disable
+      if (enrollment == null && studentId != 0)
+      {
+        _db.Enrollments.Add(new Enrollment() {StudentId = studentId, CourseId = course.CourseId });
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Details", new {id = course.CourseId });
     }
   }
 }
