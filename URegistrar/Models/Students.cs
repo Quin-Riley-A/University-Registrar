@@ -7,6 +7,7 @@ namespace URegistrar.Models
     public int StudentId { get; set; }
     public string StudentName { get; set; }
     public string StartDate { get; set; }
-    // public List<Course> Courses { get; set; }
+    public Course Course { get; set; }
+    public List<Enrollment> Enrollments { get; }
   }
 }

@@ -36,8 +36,8 @@ namespace URegistrar.Controllers
     public ActionResult Details(int id)
     {
       Course thisCourse = _db.Courses
-        .Include(course => course.Students)
-        .FirstOrDefault(CoursesController => course.Course.Id == id);
+        .Include(course => course.Enrollments)
+        .FirstOrDefault(course => course.CourseId == id);
       return View(thisCourse);
     }   
     public ActionResult Delete(int id)

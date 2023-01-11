@@ -2,13 +2,13 @@
   Layout = "_Layout";
 }
 @model URegistrar.Models.Course
-@*@using URegistrar.Models*@
+@using URegistrar.Models
 
 <h2>Course Details</h2>
 <hr />
 <h3>@Html.DisplayNameFor(model => model.CourseName): @Html.DisplayFor(model => model.CourseName)</h3>
 
-@if(@Model.Students.Count == 0)
+@if(@Model.Enrollments.Count == 0)
 {
   <p>This course does not have any students enrolled yet!</p>
 }

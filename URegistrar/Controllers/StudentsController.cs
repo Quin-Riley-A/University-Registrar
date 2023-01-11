@@ -51,8 +51,8 @@ namespace URegistrar.Controllers
     public ActionResult Details(int id)
     {
       Student thisStudent = _db.Students
-        .Include(student => student.Courses)
-        .FirstOrDefault(StudentsController => student.StudentId == id);
+        .Include(student => student.Enrollments)
+        .FirstOrDefault(student => student.StudentId == id);
       return View(thisStudent);
     }
     public ActionResult Edit(int id)
