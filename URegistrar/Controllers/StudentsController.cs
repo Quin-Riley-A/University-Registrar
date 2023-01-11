@@ -52,6 +52,7 @@ namespace URegistrar.Controllers
     {
       Student thisStudent = _db.Students
         .Include(student => student.Enrollments)
+        .ThenInclude(join => join.Course)
         .FirstOrDefault(student => student.StudentId == id);
       return View(thisStudent);
     }
@@ -68,6 +69,8 @@ namespace URegistrar.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    
   }
 }
 
