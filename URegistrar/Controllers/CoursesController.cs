@@ -95,8 +95,8 @@ namespace URegistrar.Controllers
     [HttpPost]
     public ActionResult DeleteStudent(int joinId)
     {
-      //*Add DeleteJoin method here*//
-      _db.Tags.Remove(
+      Enrollment joinEntry = _db.Enrollments.FirstOrDefault(entry => entry.EnrollmentId == joinId);
+      _db.Enrollments.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
