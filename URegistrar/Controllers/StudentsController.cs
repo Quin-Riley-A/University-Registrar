@@ -69,8 +69,33 @@ namespace URegistrar.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
-    
-  }
+    [HttpPost]
+    public ActionResult DeleteEnrollment(int joinId)
+    {
+      Enrollment joinEntry = _db.Enrollments.FirstOrDefault(entry => entry.EnrollmentId == joinId);
+      _db.Enrollments.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+    public ActionResult AddCourse(int id)
+    {
+      Course thisCourse = _db.Courses.FirstOrDefault(course => course.CourseId == id);
+      ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "CourseName");
+      return View(thisCourse);
+    }
+    [HttpPost]
+    public ActionResult AddCourse(Student student, int courseId)
+    {
+      #nullable enable
+      Enrollment? enrollment = _db.Enrollments.FirstOrDefault(join => (join.CourseId == courseId && join.StudentId == student.StudentId));
+      #nullable disable
+      if (enrollment == null && courseId != 0)
+      {
+        _db.Enrollments.Add(new Enrollment() {CourseId = courseId, StudentId = student.StudentId});
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Details", new {id = student.StudentId });
+    }
+  } 
 }
 

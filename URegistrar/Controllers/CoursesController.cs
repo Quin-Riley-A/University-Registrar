@@ -93,7 +93,7 @@ namespace URegistrar.Controllers
       return RedirectToAction("Details", new {id = course.CourseId });
     }
     [HttpPost]
-    public ActionResult DeleteStudent(int joinId)
+    public ActionResult DeleteEnrollment(int joinId)
     {
       Enrollment joinEntry = _db.Enrollments.FirstOrDefault(entry => entry.EnrollmentId == joinId);
       _db.Enrollments.Remove(joinEntry);
